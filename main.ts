@@ -3,6 +3,10 @@
 //
 // In a trial the grader runs `node /bot/main.ts` with MAKEFUN_ENV_URL set, and then this file hands
 // over to runner.ts (the last lines below): keep that hand-over and runner.ts as they are.
+//
+// Architecture: main.ts owns the patch-format parsers (unified diff, SEARCH/REPLACE, V4A, JSON)
+// and the 3-tier fuzzy matcher; runner.ts owns the trial loop (reads the trial patch, applies it
+// through main.ts, writes the report). Both files are dependency-free Node 22 TypeScript.
 
 import { mkdirSync, readFileSync, rmSync, statSync, writeFileSync, writeSync } from 'node:fs';
 import { dirname } from 'node:path';
